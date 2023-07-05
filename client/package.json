@@ -1,0 +1,75 @@
+{
+  "name": "ezlish",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://127.0.0.1:5000",
+  "dependencies": {
+    
+    "@syncfusion/ej2": "^19.4.48",
+    "@syncfusion/ej2-react-calendars": "^19.4.48",
+    "@syncfusion/ej2-react-charts": "^19.4.50",
+    "@syncfusion/ej2-react-dropdowns": "^19.4.52",
+    "@syncfusion/ej2-react-grids": "^19.4.50",
+    "@syncfusion/ej2-react-inputs": "^19.4.52",
+    "@syncfusion/ej2-react-kanban": "^19.4.48",
+    "@syncfusion/ej2-react-popups": "^19.4.52",
+    "@syncfusion/ej2-react-richtexteditor": "^19.4.50",
+    "@syncfusion/ej2-react-schedule": "^19.4.50",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@mui/material": "^5.13.6",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.26.1",
+    "font-awesome": "^4.7.0",
+    "mdb-react-ui-kit": "^6.1.0",
+    "mdbreact": "^5.2.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.2.3",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
+    "react-redux": "^7.2.8",
+    "react-router-bootstrap": "^0.26.1",
+    "react-router-dom": "^6.14.0",
+    "react-scripts": "4.0.3",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1",
+    "socket.io-client": "^4.5.1",
+    "universal-cookie": "^4.0.4",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts --openssl-legacy-provider  start",
+    "build": "react-scripts --openssl-legacy-provider  build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss-cli": "^9.1.0"
+  }
+}

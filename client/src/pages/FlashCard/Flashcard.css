@@ -1,0 +1,151 @@
+
+.flashcard-container {
+  margin: 1rem 2rem;
+}
+.column {
+  float: left;
+  padding: 0.5rem 1.5rem;
+
+}
+
+.left, .right {
+  width: 20%;
+  padding: 0.5rem 1.5rem;
+}
+
+.middle {
+  width: 60%;
+  padding: 0.5rem 1.5rem;
+  
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.flashcard-input{
+  width: 80%;
+  padding:0.1px;
+  margin: auto;
+  box-sizing: border-box;
+  border-style: groove;
+  border-color: hsl(145, 63%, 42%);
+  border-radius: 5px;
+  align-items: center;
+}
+
+.flashcard-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 0 1.5rem;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+}
+
+.flashcard-form-group {
+  display: flex;
+  flex-direction: column;
+  margin: .5rem;
+  
+}
+
+.flashcard-form-group > label {
+  color: #1eb2a6;
+  font-size: 0.85rem;
+  margin-bottom: .25rem;
+  margin: 0;
+  padding: 0 1.5rem;
+}
+
+.flashcard-form-group > select {
+  
+  font-size: 0.75rem;
+  margin-right: auto;
+  padding: 0 1.5rem;
+}
+
+.flashcard-btn {
+  background-color: #1eb2a6;
+  color: white;
+  padding: 0.5em 3em;
+  border-radius: .5em;
+  border: none;
+  cursor: pointer;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px ;
+  
+  
+  
+}
+
+.flashcard-btn:hover {
+  background-color: #1eb2a6;
+}
+
+.flashcard-grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 3em;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: .25rem;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+  background-color: white;
+  transform-style: preserve-3d;
+  transition: 150ms;
+  cursor: pointer;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+}
+
+.card:hover {
+  --translate-y: -2px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+}
+
+.card.flip {
+  --rotate-y: 180deg;
+}
+
+.card .front,
+.card .back {
+  position: absolute;
+  padding: 1rem;
+  backface-visibility: hidden;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+.flashcard-options {
+  margin-top: .5rem;
+}
+
+.flashcard-option {
+  margin-top: .25rem;
+  color: hsl(145, 63%, 42%);;
+  font-size: .75rem;
+}
+
+.flashcard-option:first-child {
+  margin-top: 0;
+}
+
+div.row{
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+#cat{
+  font-size:26px;
+}

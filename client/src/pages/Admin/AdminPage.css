@@ -1,0 +1,27 @@
+
+.selected:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    color: #1eb2a6;
+  }
+  /* .container {
+    color: #1eb2a6 ;
+}
+.card-title {
+    color: #1eb2a6 ;
+}
+  .table {
+    color: #1eb2a6;
+  }
+  
+  .table thead th {
+    color: #1eb2a6;
+  }
+  
+  .table tbody td {
+    color: #1eb2a6;
+  }
+  .select-option {
+    color: #1eb2a6;
+  }
+     */

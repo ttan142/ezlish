@@ -1,0 +1,36 @@
+div .blog-item {
+  font-size: 1.2rem;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 3px solid;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div .blog-item h1 {
+  font-style: bold;
+  font-size: 1.2rem;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+button {
+  margin-left: 10px;
+  padding: 4px;
+  color: white;
+  background-color: #1eb2a6;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+p {
+  margin-top: 20px;
+}
+
+#blog{
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

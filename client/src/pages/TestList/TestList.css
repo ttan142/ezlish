@@ -1,0 +1,149 @@
+div.container {
+  
+  display:flex;
+  flex-direction:row;
+}
+div.container .input{
+  margin-bottom: 0;
+}
+div .search {
+  margin-right: 150px;
+  width: 60%;
+}
+div .card i {
+  margin-left: 100px;
+  margin-bottom: 5px;
+}
+
+div .container #card {
+  margin-right: 20px;
+
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height:5%;
+  flex-wrap: wrap;
+  box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.15); 
+  
+}
+
+#card i{
+    margin-top: 10px;
+}
+div .container #card p {
+  margin-left: 5px;
+  font-size: 1.2rem;
+}
+
+div.user{
+  padding: 10px;
+}
+
+
+#button i {
+  margin-right: 8px;
+}
+
+#search-bar {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.form-control {
+  width: 50%;
+  border: solid;
+  border-radius: 10px;
+}
+
+
+
+
+div .blog-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+
+div .search-result {
+  margin-bottom: 200px;
+}
+@media only screen and (max-width: 990px) {
+div .container #card{
+    display: none;
+  }
+
+
+}
+
+
+
+
+.btn-group button {
+  background-color: #1eb2a6; /* Green background */
+  border: 1px solid #1eb2a6c6; /* Green border */
+  color: white; /* White text */
+  padding: 10px 10px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+
+.btn-group{
+  display:flex;
+  flex-direction: row;
+}
+
+
+#profile {
+ border-radius: 10px;
+  margin-bottom: 30px;
+  background-color: white;
+  color:black;
+  padding: 5px;
+  margin: 10px 10px;
+  box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.2);
+}
+
+#profile:hover {
+  color: white;
+  background-color: var(--green);
+}
+
+#card p {
+  margin-top: 10px;
+}
+
+img.user-avatar{
+   margin-top: 10px;
+  border-radius: 50px;
+ }
+
+
+@media screen and (max-width: 900px) {
+  .btn-group button {
+    padding: 8px 5px;
+    }
+}
+

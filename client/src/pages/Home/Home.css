@@ -1,0 +1,98 @@
+div.body1{
+    height: 86vh;
+}
+section.newletter {
+    height: 50vh;
+}
+div.cards{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    justify-content:flex-start;
+    width: 100%;
+}
+
+div .online-course h1.heading{
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: bold;
+}
+
+div.course-info{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+@media only screen and (max-width: 900px) {
+    div.cards{
+        flex-direction: column;
+        
+    }
+    div.course-info{
+   
+    flex-direction:column;
+   
+}
+ 
+}
+
+#detail{
+    color:blue;
+}
+
+div.result{
+    display: flex;
+    flex-direction: column;
+}
+
+p{
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+
+
+/* CSS */
+.button-16 {
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
+  font-family: arial,sans-serif;
+  font-size: 14px;
+  height: 36px;
+  line-height: 27px;
+  min-width: 54px;
+  padding: 0 16px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;    
+  touch-action: manipulation;
+  white-space: pre;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.button-16:hover {
+  border-color: #dadce0;
+  box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+  color: #202124;
+}
+
+.button-16:focus {
+  border-color: #4285f4;
+  outline: none;
+}
+
+
+@media only screen and (max-width: 900px){
+h1 {
+     margin-left: 0px;
+
+}
+}

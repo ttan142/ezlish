@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "next": "^12.2.2",
+    "normalize.css": "^8.0.1",
+    "react-redux": "^8.0.2",
+    "react-string-replace": "^1.1.0",
+    "styled-components": "^5.3.5"
+  }
+}

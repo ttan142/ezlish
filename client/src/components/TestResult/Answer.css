@@ -1,0 +1,19 @@
+div.answer{
+        border-radius: 0.45rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 0 0 rgb(143 156 173 / 20%);
+    margin: 20px;
+    width: 70%;
+    padding: 10px;
+    
+}
+div.answer-item{
+    margin-bottom: 20px;
+}
+
+#light{
+    background:#6495ed;
+    color:white;
+    border-radius:8px;
+    margin:5px 5px;
+}
