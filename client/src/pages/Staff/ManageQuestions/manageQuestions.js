@@ -235,6 +235,7 @@ const CreateQuestionForm1 = () => {
       
       console.log(res.data); // Log the response from the server
       setShowToast(true);
+      fetchQuestions();
       // Reset the form fields
       setAnswer("");
       setContent("");

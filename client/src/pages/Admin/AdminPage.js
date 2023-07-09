@@ -85,7 +85,8 @@ const UserList = () => {
     setUpdatedInfo({ ...updatedInfo, [e.target.name]: e.target.value });
   };
 
-  const updateUser = () => {
+  const updateUser = (e) => {
+    e.preventDefault();
     const userId = selectedUserIdRef.current;
     
     if (!userId) {
@@ -108,7 +109,8 @@ const UserList = () => {
 
 
 
-  const deleteUser = () => {
+  const deleteUser = (e) => {
+    e.preventDefault();
     const userId = selectedUserIdRef.current;
   
     if (!userId) {
