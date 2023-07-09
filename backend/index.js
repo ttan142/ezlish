@@ -59,6 +59,14 @@ app.use(
   })
 );
 
+app.use(
+  cors({
+    origin: "https://ezlish-i9mc.onrender.com/",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use("/auth", authRoute);
 app.use("/api/test", testRoute);
