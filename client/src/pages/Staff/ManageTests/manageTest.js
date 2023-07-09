@@ -2,17 +2,138 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
+
 const CreateTestForm = () => {
   const [name, setName] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showForm1, setShowForm1] = useState(false);
   const [tag, setTag] = useState('');
   const [part, setPart] = useState(0);
   const [time, setTime] = useState(0);
   const [numberQuestion, setNumberQuestion] = useState(0);
   const [audio, setAudio] = useState('');
+  const [testsEdit, setTests] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [testsPerPage, setTestsPerPage] = useState(10);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
+  const [selectedTest, setSelectedTest] = useState(null);
+  const [updatedInfo, setUpdatedInfo] = useState({ name: '', tag: '', part: '', time: '', numberQuestion: '' });
   const userInfo = useSelector((state) => state.userLogin.userInfo);
   const navigate = useNavigate();
+
+//edit test
+useEffect(() => {
+  fetchTests();
+}, []);
+
+const fetchTests = async () => {
+  try {
+    const response = await axios.get('/api/test');
+    setTests(response.data);
+  } catch (error) {
+    console.error('Error fetching tests:', error);
+  }
+};
+
+const handleColumnSort = (key) => {
+  let direction = 'asc';
+  if (sortConfig.key === key && sortConfig.direction === 'asc') {
+    direction = 'desc';
+  }
+  setSortConfig({ key, direction });
+};
+
+const indexOfLastTest = currentPage * testsPerPage;
+const indexOfFirstTest = indexOfLastTest - testsPerPage;
+
+const sortedTests = [...testsEdit].sort((a, b) => {
+  if (sortConfig.key && sortConfig.direction) {
+    const aValue = a[sortConfig.key];
+    const bValue = b[sortConfig.key];
+    if (aValue < bValue) {
+      return sortConfig.direction === 'asc' ? -1 : 1;
+    }
+    if (aValue > bValue) {
+      return sortConfig.direction === 'asc' ? 1 : -1;
+    }
+  }
+  return 0;
+});
+
+const currentTests = sortedTests.slice(indexOfFirstTest, indexOfLastTest);
+
+const totalPages = Math.ceil(sortedTests.length / testsPerPage);
+
+const handlePrevPage = () => {
+  setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+};
+
+const handleNextPage = () => {
+  setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+};
+
+const handleTestClick = (test) => {
+  setSelectedTest(test);
+  setUpdatedInfo({
+    name: test.name,
+    tag: test.tag,
+    part: test.part,
+    time: test.time,
+    numberQuestion: test.numberQuestion,
+  });
+};
+
+const handleInputChange = (e) => {
+  setUpdatedInfo({ ...updatedInfo, [e.target.name]: e.target.value });
+};
+
+const updateTest = (e) => {
+  e.preventDefault();
+  if (!selectedTest) {
+    // No test selected, handle the error
+    return;
+  }
+
+  axios
+    .put(`/api/test/${selectedTest._id}`, updatedInfo)
+    .then((response) => {
+      // Handle the response if the update is successful
+      console.log('Test updated:', response.data);
+      fetchTests(); // Refetch the test data to reflect the changes
+      setSelectedTest(null); // Clear the selected test
+    })
+    .catch((error) => {
+      // Handle errors if the update fails
+    });
+};
+
+const deleteTest = (e) => {
+  e.preventDefault();
+
+  if (!selectedTest) {
+    // No test selected, handle the error
+    return;
+  }
+
+  axios
+    .delete(`/api/test/${selectedTest._id}`)
+    .then((response) => {
+      // Handle the response if the delete is successful
+      console.log('Test deleted:', response.data);
+      fetchTests(); // Refetch the test data to reflect the changes
+      setSelectedTest(null); // Clear the selected test
+    })
+    .catch((error) => {
+      // Handle errors if the delete fails
+    });
+};
+//edit test
+
+
+
+
   
   useEffect(() => {
     if (!userInfo.isStaff ) {
@@ -56,7 +177,7 @@ const CreateTestForm = () => {
       const res = await axios.post('/api/test', newTest);
      
       console.log(res.data); // Log the response from the server
-      
+      fetchTests();
       // Reset the form fields
       setName('');
       
@@ -73,7 +194,7 @@ const CreateTestForm = () => {
 
   return (
     <div>
-    {showForm ? (<div className="container h-100 my-4">
+    {showForm && (<div className="container h-100 my-4">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
             <div className="card text-black" style={{ borderRadius: "25px" }}>
@@ -157,12 +278,12 @@ const CreateTestForm = () => {
         </div>
         <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
   
-    <button type="submit" className="btn btn-primary btn-floating mr-3">
+    <button type="submit" className="btn btn-outline-primary btn-floating mr-3">
       Create
     </button>
     
   
-    <button className="btn btn-primary btn-floating mx-4" onClick={() => setShowForm(false)}>
+    <button className="btn btn-outline-primary btn-floating mx-4" onClick={() => setShowForm(false)}>
       Close
     </button>
     
@@ -195,10 +316,197 @@ const CreateTestForm = () => {
     </div>
     </div>
     </div>
-    </div>) : (
-        <button className="btn btn-primary" onClick={() => setShowForm(true)}>
+    </div>) }  {!showForm &&(
+      <div className=" justify-content-center align-items-center text-center h-100 mt-3 mb-3 pb-3 pt-3">
+        <button className="btn btn-outline-primary w-25" onClick={() => {setShowForm1(false);
+          setShowForm(true)}}>
           Create Test
         </button>
+        </div>
+      )}
+
+      {showForm1 && (
+      <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl ">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12 grid-margin stretch-card">
+            <div className="card" style={{ borderRadius: "25px" }}>
+              <div className="card-body">
+                <h4 className="card-title">Tests table</h4>
+                <div className="table-responsive">
+                  <table className="table table-bordered" style={{ tableLayout: 'fixed' }}>
+                    <thead>
+                      <tr>
+                        <th
+                          className="text-center"
+                          style={{ width: '5vw' }}
+                          onClick={() => handleColumnSort('id')}
+                        >
+                          #
+                        </th>
+                        <th
+                          onClick={() => handleColumnSort('name')}
+                          style={{ width: '25vw' }}
+                          className={sortConfig.key === 'name' ? `sorted-${sortConfig.direction}` : ''}
+                        >
+                          Name
+                        </th>
+                        <th
+                          onClick={() => handleColumnSort('tag')}
+                          className={sortConfig.key === 'tag' ? `sorted-${sortConfig.direction}` : ''}
+                        >
+                          Tag
+                        </th>
+                        <th
+                          onClick={() => handleColumnSort('part')}
+                          style={{ width: '8vw' }}
+                          className={sortConfig.key === 'part' ? `sorted-${sortConfig.direction}` : ''}
+                        >
+                          Part
+                        </th>
+                        <th
+                          onClick={() => handleColumnSort('time')}
+                          style={{ width: '8vw' }}
+                          className={sortConfig.key === 'time' ? `sorted-${sortConfig.direction}` : ''}
+                        >
+                          Time
+                        </th>
+                        <th
+                          onClick={() => handleColumnSort('numberQuestion')}
+                          style={{ width: '12vw' }}
+                          className={sortConfig.key === 'numberQuestion' ? `sorted-${sortConfig.direction}` : ''}
+                        >
+                          Number of Questions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {currentTests.map((test, index) => (
+                        <tr
+                          key={index + 1 + indexOfFirstTest}
+                          className={selectedTest && selectedTest._id === test._id ? 'selected' : ''}
+                          onClick={() => handleTestClick(test)}
+                        >
+                          <td className="text-center">{index + 1 + indexOfFirstTest}</td>
+                          <td>{test.name}</td>
+                          <td>{test.tag}</td>
+                          <td>{test.part}</td>
+                          <td>{test.time}</td>
+                          <td>{test.numberQuestion}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  {selectedTest && (
+                    <div>
+                      <h4>Edit Test</h4>
+                      <form>
+                        <div className="form-group">
+                          <label htmlFor="name">Name:</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            name="name"
+                            value={updatedInfo.name}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="tag">Tag:</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="tag"
+                            name="tag"
+                            value={updatedInfo.tag}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="part">Part:</label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="part"
+                            name="part"
+                            value={updatedInfo.part}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="time">Time:</label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="time"
+                            name="time"
+                            value={updatedInfo.time}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="numberQuestion">Number of Questions:</label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="numberQuestion"
+                            name="numberQuestion"
+                            value={updatedInfo.numberQuestion}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <button className="btn btn-outline-primary" onClick={updateTest}>Update Test</button>
+                        <button className="btn btn-outline-danger" onClick={deleteTest}>Delete Test</button>
+                      </form>
+                    </div>
+                  )}
+                </div>
+                {/* Pagination */}
+                <div className="d-flex justify-content-between align-items-center mt-3">
+                  <div className="form-group mb-0">
+                    <span>Tests per page: </span>
+                    <select
+                      value={testsPerPage}
+                      onChange={(e) => {
+                        setCurrentPage(1);
+                        setSortConfig({ key: ' ', direction: ' ' });
+                        setTestsPerPage(parseInt(e.target.value));
+                      }}
+                    >
+                      <option value={10}>10</option>
+                      <option value={20}>20</option>
+                      <option value={30}>30</option>
+                    </select>
+                  </div>
+                  <div className="page-range">
+                    {indexOfFirstTest + 1}-{Math.min(indexOfLastTest, sortedTests.length)} of {sortedTests.length}
+                  </div>
+                  <div className="page-buttons">
+                    <button className="btn btn-lg" onClick={handlePrevPage} disabled={currentPage === 1}>
+                      <MdNavigateBefore />
+                    </button>
+                    <button className="btn btn-lg" onClick={handleNextPage} disabled={currentPage === totalPages}>
+                      <MdNavigateNext />
+                    </button>
+                    <button className="btn btn-outline-primary" onClick={() => setShowForm1(false)}>
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    ) }   {!showForm1&&(
+      <div className=" justify-content-center align-items-center text-center h-100 mt-3 mb-3 pb-3 ">
+        <button className="btn btn-outline-primary w-25" onClick={() => {setShowForm1(true);
+        setShowForm(false)}}>
+          Edit Tests
+        </button>
+        </div>
       )}
       </div>
   );

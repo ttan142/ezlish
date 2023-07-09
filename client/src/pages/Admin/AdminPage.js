@@ -78,7 +78,7 @@ const UserList = () => {
   const handleUserClick = (user) => {
     setSelectedUser(user);
     selectedUserIdRef.current = user._id;
-    setUpdatedInfo({ name: user.name, email: user.email, type: user.type });
+    setUpdatedInfo({ name: user.name, email: user.email, type: user.type, balance: user.balance });
   };
 
   const handleInputChange = (e) => {

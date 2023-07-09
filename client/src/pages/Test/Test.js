@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import "./Test.css";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector  } from 'react-redux';
@@ -15,15 +15,31 @@ function Test() {
   const state = location.state; /*   test data  table     */
   console.log(state.audio)
   const history = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [showToast]);
 
   const handleTest = async () => {
     console.log(TokenService.getuserInfo()._id);
     const userId = user._id;
     const userBalance = user.balance;
     const testCost=10;
-    if (user.Balance<testCost){alert("not enough balance");
-  history("/home");}
-  else{
+    if (userBalance < testCost) {
+      console.log('Not enough balance. Toast: Not enough balance.');
+      // Add additional code or show a toast message here if desired
+      setShowToast(true);
+      return; // Stop execution if the balance is insufficient
+    }
     const response = await axios
       .put(`/api/users/${testCost}/${userId}`)
       .then((response) => {
@@ -41,12 +57,29 @@ function Test() {
     state.questions = data.answer;
     state.parts = data.array;
   
-    history("/toeic", { state: state });}
+    history("/toeic", { state: state });
   };
   
 
   return (
-    <>
+    <>{showToast && (
+      <div
+        className="toast show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-delay="2000"
+        style={{ position: 'absolute', top: '12vh', right: 0, zIndex: 1 }}
+      >
+        <div className="toast-header">
+          <strong className="mr-auto">Not enough balance!</strong>
+          
+        </div>
+        <div className="toast-body" style={{backgroundColor: '#e6e6e6'}}>
+          Unfortunaly your current balance is {user.balance}$ and it is not enough to take this test. <br></br>Please check your balance.
+        </div>
+      </div>
+    )}
       <section>
         <div className="test">
           <div className="test-info">

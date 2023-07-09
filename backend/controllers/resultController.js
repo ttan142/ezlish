@@ -349,10 +349,14 @@ function getLisScore(score) {
 }
 
 function getScore(arr) {
-  const lis = getCorrectAnswer(arr.slice(0, 100));
-  const read = getCorrectAnswer(arr.slice(100, 200));
+  // const lis = getCorrectAnswer(arr.slice(0, 100));
+  // const read = getCorrectAnswer(arr.slice(100, 200));
 
-  return getLisScore(lis) + getReadScore(read);
+  // return getLisScore(lis) + getReadScore(read);
+  const totalQuestions = 10/arr.length;
+  const totalCorrect = getCorrectAnswer(arr);
+
+  return ((totalCorrect * totalQuestions) ).toFixed(2).concat('/10');
 }
 
 function groupBy(list, keyGetter) {

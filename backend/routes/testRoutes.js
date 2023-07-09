@@ -10,6 +10,8 @@ router.get("/name", TestCtrl.getAllTestNames);
 router.get('/name/:name', TestCtrl.findTestByName);
 router.post('/', TestCtrl.createTest); 
 router.put('/test/:questionId', TestCtrl.addQuestionToTest);
+router.put('/:id', TestCtrl.updateTest);
+router.delete('/:id', TestCtrl.deleteTest);
 module.exports = router
 
 

@@ -177,3 +177,56 @@ exports.getTestByResult = asyncHandler(async (req, res) => {
     throw new Error("Test not found");
   }
 });
+
+
+// @desc    Update test information
+// @route   PUT /api/tests/:id
+// @access  Private
+exports.updateTest = asyncHandler(async (req, res) => {
+  const { name, tag, part, time, numberQuestion } = req.body;
+  const { id } = req.params;
+
+  try {
+    const test = await Test.findById(id);
+
+    if (!test) {
+      res.status(404).json({ message: 'Test not found' });
+      return;
+    }
+
+    // Update the test information
+    test.name = name || test.name;
+    test.tag = tag || test.tag;
+    test.part = part || test.part;
+    test.time = time || test.time;
+    test.numberQuestion = numberQuestion || test.numberQuestion;
+    const updatedTest = await test.save();
+
+    res.json(updatedTest);
+  } catch (error) {
+    console.error('Error updating test:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// @desc    Delete a test
+// @route   DELETE /api/tests/:id
+// @access  Private (admin only)
+exports.deleteTest = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const test = await Test.findById(id);
+
+    if (!test) {
+      res.status(404).json({ message: 'Test not found' });
+      return;
+    }
+
+    await test.remove();
+    res.json({ message: 'Test deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting test:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});

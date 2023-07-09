@@ -12,6 +12,7 @@ import { Pagination } from "../../components/Result";
 function ToeicTest() {
 
   const [imageError, setImageError] = useState(false);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
 
   const handleImageError = () => {
     setImageError(true);
@@ -58,7 +59,7 @@ function ToeicTest() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowBook(false);
-    }, 5000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -137,21 +138,12 @@ function ToeicTest() {
     history("/");
   };
 
+  
   const handleSubmit = useCallback(() => {
-    const userChoice = [];
-    const sum = state.current.parts.reduce((total, part) => total + part.numberQuestion, 0);
-    console.log(sum);
-    for (let i = 1; i <= sum; i++) {
-      var s = document.querySelector(
-        'input[name="'.concat(i).concat('"]:checked')
-      );
-      if (s) {
-        userChoice.push(s.value[0]);
-      } else userChoice.push("");
-    }
+    const userChoice = Object.values(selectedAnswers).map((answer) => answer[0]);
     
     const key = getKeyArray(userChoice, keyAnswer.current);
-    
+    console.log(userChoice);
     axios
       .post("http://localhost:5000/api/results/" + state.current._id, {
         user: TokenService.getuserInfo()._id,
@@ -234,13 +226,13 @@ function ToeicTest() {
         <h1>
           {state.current.name} Test {state.current.test}
         </h1>
-        
-        <button onClick={handleExit}>Exit</button>
+       
+        <button className="btn btn-outline-primary" style={{ color: '#1eb2a6', borderColor: '#1eb2a6' }} onClick={handleExit}>Exit</button>
       </div>
    
-      <div className="container">
-        <div className="question-context">
-        <div className="audio-context">
+      <div className="container1">
+        <div className="question-context1">
+        <div className="audio-context1">
          <div className="item1">
          <audio controls>
             <source
@@ -264,58 +256,7 @@ function ToeicTest() {
 </div>
           {currentQuestions.map((ques) => (
             <>
-              {ques.types === "group" ? (
-                <>
-                  <div id="question-wrapper">
-                    <p>{ques.content}</p>
-                    <p>
-                      {ques.question < 100 ? (
-                        <p></p>
-                      ) : imageError ? (
-                        <p>{ques.upload}</p> // Render ques.upload as text if there's an error loading the image
-                      ) : (
-                        <img src={ques.upload} alt="Uploaded Image" onError={handleImageError} /> // Render the image with onError event handler
-                      )}
-                    </p>
-                    {ques.questions.map((q) => (
-                      <>
-                        <div id={"section".concat(q.question)}>
-                          <p>
-                            <span id="light">{q.question}</span>{" "}
-                            {q.content && <em>{q.content}</em>}
-                          </p>
-
-                          {q.option.map((op) => (
-                            <>
-                              <input
-                                type="radio"
-                                id={op.concat(ques.upload).concat(q.question)}
-                                value={op}
-                                name={q.question}
-                                onClick={(e) => {
-                                  setValue(e.target.name);
-                                }}
-                              />
-                              <span>
-                                <label
-                                  htmlFor={op
-                                    .concat(ques.upload)
-                                    .concat(q.question)}
-                                >
-                                  {" "}
-                                  {op}{" "}
-                                </label>
-                              </span>
-                              <br></br>
-                            </>
-                          ))}
-                        </div>
-                      </>
-                    ))}
-                  </div>
-                </>
-              ): (
-                  <>
+             
                     <div id="question-wrapper">
                       <div id={"section".concat(ques.question)}
                       >
@@ -338,8 +279,13 @@ function ToeicTest() {
                                 //option
                                 name={ques.question}
                                 value={opt}
+                                checked={selectedAnswers[ques._id] === opt}
                                 onClick={(e) => {
                                   setValue(e.target.name);
+                                  setSelectedAnswers((prevSelectedAnswers) => ({
+                                    ...prevSelectedAnswers,
+                                    [ques._id]: e.target.value,
+                                  }));
                                 }}
                               />
                               <span>
@@ -358,8 +304,6 @@ function ToeicTest() {
                         </p>
                       </div>
                     </div>
-                  </>
-                )}
               </>
             ))
                                   }

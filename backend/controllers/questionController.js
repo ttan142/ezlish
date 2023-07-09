@@ -155,3 +155,71 @@ function groupBy(list, keyGetter) {
   });
   return map;
 }
+
+
+// @desc    Update a question
+// @route   PUT /api/questions/:id
+// @access  Private (admin only)
+exports.updateQuestion = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { answer, content, explain, options, part, question, upload } = req.body;
+
+  try {
+    const question1 = await Question.findById(id);
+
+    if (!question1) {
+      res.status(404).json({ message: 'Question not found' });
+      return;
+    }
+
+    // Update the question information
+    question1.answer = answer || question1.answer;
+    question1.content = content || question1.content;
+    question1.explain = explain || question1.explain;
+    question1.options = options || question1.options;
+    question1.part = part || question1.part;
+    question1.question = question || question1.question;
+    question1.upload = upload || question1.upload;
+    const updatedQuestion = await question1.save();
+
+    res.json(updatedQuestion);
+  } catch (error) {
+    console.error('Error updating question:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// @desc    Delete a question
+// @route   DELETE /api/questions/:id
+// @access  Private (admin only)
+exports.deleteQuestion = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const question = await Question.findById(id);
+
+    if (!question) {
+      res.status(404).json({ message: 'Question not found' });
+      return;
+    }
+
+    // Get the test ID associated with the question
+    const testId = question.test;
+
+    // Remove the question from the Question collection
+    await question.remove();
+
+    // Update the Test collection to remove the question ID from the test's question array
+    await Test.findOneAndUpdate(
+      { _id: testId },
+      { $pull: { question: id } },
+      { new: true }
+    );
+
+    res.json({ message: 'Question deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting question:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
