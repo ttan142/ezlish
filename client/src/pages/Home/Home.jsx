@@ -13,7 +13,7 @@ const Home = ({user}) => {
        console.log(user);
        if(user)
          axios
-           .get("http://localhost:5000/api/results/".concat(user._id), {
+           .get("https://ezlish.onrender.com/api/results/".concat(user._id), {
              params: { limit: 4 }
            })
            .then(
@@ -27,7 +27,7 @@ const Home = ({user}) => {
              }
            );
          axios
-           .get("http://localhost:5000/api/courses/by-user/".concat(user._id))
+           .get("https://ezlish.onrender.com/api/courses/by-user/".concat(user._id))
            .then(
              (response) => {
                setEnrolledCourses(response.data);

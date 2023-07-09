@@ -8,7 +8,7 @@ export const getQuestions = (testId) => async (dispatch) => {
         dispatch({ type: types.QUESTION_REQUEST });
 
 
-        const  {data} = await axios.get('http://localhost:5000/api/questions/'.concat(testId.toString()));
+        const  {data} = await axios.get('https://ezlish.onrender.com/api/questions/'.concat(testId.toString()));
 
 
         dispatch({

@@ -59,7 +59,7 @@ function Test() {
 
 
   const handleTest = async ()=>{
-     const  {data} = await axios.get('http://localhost:5000/api/questions/'.concat(state._id));
+     const  {data} = await axios.get('https://ezlish.onrender.com/api/questions/'.concat(state._id));
     state.questions = data.answer
     state.parts = data.array
      history("/toeic", { state: state });
@@ -70,7 +70,7 @@ function Test() {
 
    useEffect(()=>{
      axios
-       .get(`http://localhost:5000/api/comments/?testId=`.concat(state._id))
+       .get(`https://ezlish.onrender.com/api/comments/?testId=`.concat(state._id))
        .then((res) => {
          console.log(res.data);
          setComments(res.data)

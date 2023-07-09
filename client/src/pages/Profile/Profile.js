@@ -24,7 +24,7 @@ function Profile() {
     setLoading(true);
     axios
       .get(
-        "http://localhost:5000/api/results/".concat(
+        "https://ezlish.onrender.com/api/results/".concat(
           TokenService.getuserInfo()._id
         ),
         {

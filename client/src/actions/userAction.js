@@ -18,7 +18,7 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            `http://localhost:5000/api/users/login`,
+            `https://ezlish.onrender.com/api/users/login`,
             { email, password },
             config,
         )
@@ -67,7 +67,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            `http://localhost:5000/api/users`,
+            `https://ezlish.onrender.com/api/users`,
             { name, email, password },
             config
         )
@@ -104,7 +104,7 @@ export const updateBalance = (userId, newBalance) => async (dispatch) => {
       };
   
       const { data } = await axios.put(
-        `/api/users/${userId}`,
+        `https://ezlish.onrender.com/api/users/${userId}`,
         { balance: newBalance },
         config
       );
