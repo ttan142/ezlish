@@ -61,7 +61,7 @@ app.use(
 
 app.use(
   cors({
-    origin: "https://ezlish-i9mc.onrender.com/",
+    origin: "https://ezlish-i9mc.onrender.com",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
