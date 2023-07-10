@@ -16,7 +16,7 @@ function TestResult(props) {
   }, []);
   useEffect(()=>{
 
-      axios.get("https://ezlish.onrender.com/api/results/test/".concat(resultId)).then(
+      axios.get("https://ezlish-server.onrender.com/api/results/test/".concat(resultId)).then(
         (response) => {
           console.log(response);  
           setData(response.data.result[0]);
@@ -37,7 +37,7 @@ function TestResult(props) {
    }
 
    const handleAgain = ()=>{
-    axios.get("https://ezlish.onrender.com/api/test/".concat(resultId)).then(
+    axios.get("https://ezlish-server.onrender.com/api/test/".concat(resultId)).then(
       (response) => {
         console.log(response.data[0].result);
       history(`/test/${response.data[0].result._id}`, {

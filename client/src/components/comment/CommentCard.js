@@ -29,7 +29,7 @@ function CommentCard({ id }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://ezlish.onrender.com/api/comments/${id}?limit=${page * 5}`)
+      .get(`https://ezlish-server.onrender.com/api/comments/${id}?limit=${page * 5}`)
       .then((res) => {
         setComments((r) => (r = res.data.comments));
         setLoading(false);

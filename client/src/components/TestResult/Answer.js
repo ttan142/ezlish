@@ -7,7 +7,7 @@ function Answer({resultId}) {
     const [correct, setCorrect] = useState([]);
     useEffect(() => {
       axios
-        .get("https://ezlish.onrender.com/api/results/answer/".concat(resultId))
+        .get("https://ezlish-server.onrender.com/api/results/answer/".concat(resultId))
         .then(
           (response) => {
             console.log(response.data.keyAnswer);

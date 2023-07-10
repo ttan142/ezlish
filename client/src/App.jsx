@@ -45,7 +45,7 @@ const App = () => {
   },[dispatch])
   useEffect(() => {
     const getUser = () => {
-      fetch("https://ezlish.onrender.com/auth/login/success", {
+      fetch("https://ezlish-server.onrender.com/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {

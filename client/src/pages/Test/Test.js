@@ -41,7 +41,7 @@ function Test() {
       return; // Stop execution if the balance is insufficient
     }
     const response = await axios
-      .put(`https://ezlish.onrender.com/api/users/${testCost}/${userId}`)
+      .put(`https://ezlish-server.onrender.com/api/users/${testCost}/${userId}`)
       .then((response) => {
         // Handle the response if the update is successful
         console.log('User updated:', response.data);
@@ -52,7 +52,7 @@ function Test() {
       });
   
     const { data } = await axios.get(
-      `https://ezlish.onrender.com/api/questions/${state._id}`
+      `https://ezlish-server.onrender.com/api/questions/${state._id}`
     );
     state.questions = data.answer;
     state.parts = data.array;

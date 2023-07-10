@@ -43,7 +43,7 @@ const CreateQuestionForm1 = () => {
     console.log(testNames);
   
     try {
-      const response = await axios.get(`https://ezlish.onrender.com/api/questions/${selectedTestID}`);
+      const response = await axios.get(`https://ezlish-server.onrender.com/api/questions/${selectedTestID}`);
       const questionData = response.data.answer.flat();
       console.log(questionData);
       console.log(response.data);
@@ -59,7 +59,7 @@ const CreateQuestionForm1 = () => {
   const fetchQuestions = async () => {
     
     try {
-      const response = await axios.get(`https://ezlish.onrender.com/api/questions/${testID1}`);
+      const response = await axios.get(`https://ezlish-server.onrender.com/api/questions/${testID1}`);
       const questionData = response.data.answer.flat();
       console.log(questionData);
       console.log(response.data);
@@ -127,7 +127,7 @@ const CreateQuestionForm1 = () => {
    
   
     axios
-      .put(`https://ezlish.onrender.com/api/questions/${questionId}`, updatedInfo)
+      .put(`https://ezlish-server.onrender.com/api/questions/${questionId}`, updatedInfo)
       .then((response) => {
         // Handle the response if the update is successful
         console.log('Question updated:', response.data);
@@ -149,7 +149,7 @@ const CreateQuestionForm1 = () => {
     }
 
     axios
-      .delete(`https://ezlish.onrender.com/api/questions/${questionId}`)
+      .delete(`https://ezlish-server.onrender.com/api/questions/${questionId}`)
       .then((response) => {
         // Handle the response if the delete is successful
         console.log('Question deleted:', response.data);
@@ -191,7 +191,7 @@ const CreateQuestionForm1 = () => {
 
   useEffect(() => {
     axios
-      .get('https://ezlish.onrender.com/api/test')
+      .get('https://ezlish-server.onrender.com/api/test')
       .then(res => {
         const testNames1 = res.data.map((test) => ({
           value: test._id,
@@ -231,7 +231,7 @@ const CreateQuestionForm1 = () => {
     try {
       
       // Send a POST request to the server to create the question
-      const res = await axios.post("https://ezlish.onrender.com/api/questions", newQuestion);
+      const res = await axios.post("https://ezlish-server.onrender.com/api/questions", newQuestion);
       
       console.log(res.data); // Log the response from the server
       setShowToast(true);

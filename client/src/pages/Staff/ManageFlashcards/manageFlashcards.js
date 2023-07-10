@@ -27,7 +27,7 @@ function FlashCards() {
 
   useEffect(() => {
     axios
-      .get('https://ezlish.onrender.com/api/flashcard/category')
+      .get('https://ezlish-server.onrender.com/api/flashcard/category')
       .then(res => {
         setCategories(res.data)
       })
@@ -43,7 +43,7 @@ function FlashCards() {
   function handleSubmit(e) {
     e.preventDefault()
     axios
-    .get('https://ezlish.onrender.com/api/flashcard'.concat("/").concat(categoryEl.current.value), {
+    .get('https://ezlish-server.onrender.com/api/flashcard'.concat("/").concat(categoryEl.current.value), {
       params: {
         
         category: categoryEl.current.value
@@ -70,7 +70,7 @@ function FlashCards() {
         question,
         answer
     };
-    axios.post('https://ezlish.onrender.com/api/flashcard/add', userObject)
+    axios.post('https://ezlish-server.onrender.com/api/flashcard/add', userObject)
         .then((res) => {
           alert("Create flashcard successfully");
             console.log(res)

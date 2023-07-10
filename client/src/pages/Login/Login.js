@@ -42,15 +42,15 @@ const Login = () => {
   
 
   const google = () => {
-    window.open("https://ezlish.onrender.com/auth/google", "_self");
+    window.open("https://ezlish-server.onrender.com/auth/google", "_self");
   };  
 
   const github = () => {
-    window.open("https://ezlish.onrender.com/auth/github", "_self");
+    window.open("https://ezlish-server.onrender.com/auth/github", "_self");
   };
 
   const facebook = () => {
-    window.open("https://ezlish.onrender.com/auth/facebook", "_self");
+    window.open("https://ezlish-server.onrender.com/auth/facebook", "_self");
   };
 
   return (

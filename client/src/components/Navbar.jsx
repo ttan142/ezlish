@@ -69,7 +69,7 @@ const Navbar = ({user}) => {
 
 
   const logoutHandler = () => {
- window.open("https://ezlish.onrender.com/auth/logout", "_self");
+ window.open("https://ezlish-server.onrender.com/auth/logout", "_self");
  dispatch(logout());
   };
 

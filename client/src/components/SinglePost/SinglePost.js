@@ -11,7 +11,7 @@ export default function SinglePost() {
   
       useEffect(() => {
         axios
-            .get(`https://ezlish.onrender.com/api/posts/${postsId}`)
+            .get(`https://ezlish-server.onrender.com/api/posts/${postsId}`)
             .then(
                 (response) => {
                     console.log(response);

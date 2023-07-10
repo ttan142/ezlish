@@ -30,7 +30,7 @@ useEffect(() => {
 
 const fetchTests = async () => {
   try {
-    const response = await axios.get('https://ezlish.onrender.com/api/test');
+    const response = await axios.get('https://ezlish-server.onrender.com/api/test');
     setTests(response.data);
   } catch (error) {
     console.error('Error fetching tests:', error);
@@ -97,7 +97,7 @@ const updateTest = (e) => {
   }
 
   axios
-    .put(`https://ezlish.onrender.com/api/test/${selectedTest._id}`, updatedInfo)
+    .put(`https://ezlish-server.onrender.com/api/test/${selectedTest._id}`, updatedInfo)
     .then((response) => {
       // Handle the response if the update is successful
       console.log('Test updated:', response.data);
@@ -118,7 +118,7 @@ const deleteTest = (e) => {
   }
 
   axios
-    .delete(`https://ezlish.onrender.com/api/test/${selectedTest._id}`)
+    .delete(`https://ezlish-server.onrender.com/api/test/${selectedTest._id}`)
     .then((response) => {
       // Handle the response if the delete is successful
       console.log('Test deleted:', response.data);
@@ -174,7 +174,7 @@ const deleteTest = (e) => {
       // Send a POST request to the server to create the test
       console.log(newTest);
       setShowToast(true);
-      const res = await axios.post('https://ezlish.onrender.com/api/test', newTest);
+      const res = await axios.post('https://ezlish-server.onrender.com/api/test', newTest);
      
       console.log(res.data); // Log the response from the server
       fetchTests();

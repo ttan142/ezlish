@@ -2,7 +2,7 @@ import axios from "axios";
 import TokenService from "../utils/tokenService";
 
 const instance = axios.create({
-    baseURL: "https://ezlish.onrender.com/api",
+    baseURL: "https://ezlish-server.onrender.com/api",
     headers: {
         "Content-Type": "application/json"
     
@@ -48,7 +48,7 @@ instance.interceptors.response.use(
             if (err.response.status === 403 && err.response.data) {
                 //login again
                 window.alert("Your session time out.Please login again !")
-                window.open("https://ezlish.onrender.com/auth/logout", "_self");
+                window.open("https://ezlish-server.onrender.com/auth/logout", "_self");
                 TokenService.removeuserInfo();
                 document.location.replace("/login")
                 return Promise.reject(err.response.data);

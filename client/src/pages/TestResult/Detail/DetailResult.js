@@ -11,7 +11,7 @@ function DetailResult() {
   useEffect(() => {
     setLoading(true);
      axios
-       .get(`https://ezlish.onrender.com/api/results/answer/details/${resultId}`
+       .get(`https://ezlish-server.onrender.com/api/results/answer/details/${resultId}`
     
        )
        .then(

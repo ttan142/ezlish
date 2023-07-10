@@ -31,7 +31,7 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://ezlish.onrender.com/api/users');
+      const response = await axios.get('https://ezlish-server.onrender.com/api/users');
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -95,7 +95,7 @@ const UserList = () => {
     }
     
     axios
-      .put(`https://ezlish.onrender.com/api/users/${userId}`, updatedInfo)
+      .put(`https://ezlish-server.onrender.com/api/users/${userId}`, updatedInfo)
       .then((response) => {
         // Handle the response if the update is successful
         console.log('User updated:', response.data);
@@ -119,7 +119,7 @@ const UserList = () => {
     }
   
     axios
-      .delete(`https://ezlish.onrender.com/api/users/${userId}`)
+      .delete(`https://ezlish-server.onrender.com/api/users/${userId}`)
       .then((response) => {
         // Handle the response if the delete is successful
         console.log('User deleted:', response.data);
