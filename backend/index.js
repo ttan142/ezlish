@@ -56,6 +56,7 @@ app.use(
     origin: [
       "https://ezlish-i9mc.onrender.com",
       "http://localhost:3000",
+      "https://ezlish-soict-hust.onrender.com",
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
