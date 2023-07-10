@@ -55,7 +55,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://ezlish-soict-hust.onrender.com",
       "https://ezlish.onrender.com",
     ],
     methods: "GET,POST,PUT,DELETE",
