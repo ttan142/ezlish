@@ -70,8 +70,8 @@ function SearchBar(props) {
             <h1>Exam</h1>
             <div className="btn-group">
                 <button onClick={getAll} >All</button>
-                <button onClick={getToeicTest}>TOEIC</button>
-                <button onClick={getIeltsTest}>IELTS</button>
+                {/* <button onClick={getToeicTest}>TOEIC</button>
+                <button onClick={getIeltsTest}>IELTS</button> */}
 
             </div>
             <div className="btn-group 1">

@@ -106,46 +106,50 @@ exports.updateUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users/login
 // @access  Public
 exports.authUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-    if (!user) {res.status(401).json({message:"Wrong email"})}
-   
-   
-    if (!await user.matchPassword(password)) {
-        res.status(401).json({message:"Wrong password"})
-    } 
+  if (!user) {
+    res.status(401).json({ message: "Wrong email" });
+  }
 
-    let refreshToken = await refresh.createToken(user);
-    const accessToken = generateToken(user._id);
+  if (!(await user.matchPassword(password))) {
+    res.status(401).json({ message: "Wrong password" });
+  }
 
-    res.status(200).cookie('accessToken', accessToken, {
-        domain:'localhost:3000',
-        sameSite: 'none',
-        httpOnly: true,
-     
+  let refreshToken = await refresh.createToken(user);
+  const accessToken = generateToken(user._id);
+
+  const domain = req.headers.origin; // Get the domain from the request headers
+
+  res
+    .status(200)
+    .cookie("accessToken", accessToken, {
+      domain: domain,
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
     })
-    .cookie('refreshToken', refreshToken, {
-        domain: 'localhost:3000',
-            sameSite: 'none',
-            httpOnly: true,
-           
-        })
+    .cookie("refreshToken", refreshToken, {
+      domain: domain,
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
+    })
     .json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        token: accessToken,
-        refreshToken: refreshToken,
-        photo:user.photo,
-        balance: user.balance,
-        isAdmin: user.type === 'admin',
-        isStaff: user.type === 'staff',
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: accessToken,
+      refreshToken: refreshToken,
+      photo: user.photo,
+      balance: user.balance,
+      isAdmin: user.type === "admin",
+      isStaff: user.type === "staff",
     });
-
-    
 });
+
 
 // @desc    Register a new user
 // @route   POST /api/users
