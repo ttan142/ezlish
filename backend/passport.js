@@ -6,8 +6,8 @@ const passport = require("passport");
 const refresh = require('./controllers/refreshController')
 
 const Refresh = require("./models/refreshTokenModel")
-const GOOGLE_CLIENT_ID = "1085038059617-hdhu0vpbgg8pl2knb524mj9a91j0ssm3.apps.googleusercontent.com"  
-const GOOGLE_CLIENT_SECRET ="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"
+const GOOGLE_CLIENT_ID = "440002230891-dslvrks6i84vsvre7ngrkfh7r3b65grc.apps.googleusercontent.com"  
+const GOOGLE_CLIENT_SECRET ="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"
 
 GITHUB_CLIENT_ID = "your id";
 GITHUB_CLIENT_SECRET = "your id";
