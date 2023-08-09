@@ -4,8 +4,9 @@ const GithubStrategy = require("passport-github2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const passport = require("passport");
 const refresh = require('./controllers/refreshController')
-
-const Refresh = require("./models/refreshTokenModel")
+const User = mongoose.model('User');
+const Refresh = require("./models/refreshTokenModel");
+const { default: mongoose } = require("mongoose");
 const GOOGLE_CLIENT_ID = "440002230891-dslvrks6i84vsvre7ngrkfh7r3b65grc.apps.googleusercontent.com"  
 const GOOGLE_CLIENT_SECRET ="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"
 
