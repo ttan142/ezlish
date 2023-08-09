@@ -1,48 +1,50 @@
 import Navbar from "./components/Navbar";
 import "./app.css";
-
+import "./pages/TestingScreen/loading.css";
 import { BrowserRouter } from "react-router-dom";
-import React,{ useEffect } from "react";
-import Footer from "./components/Footer"
+import React, { useEffect } from "react";
+import Footer from "./components/Footer";
 
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import TokenService from "./utils/tokenService";
-import * as types from './constant/User/userConstants'
+import * as types from "./constant/User/userConstants";
 
 import AuthRoutes from "./routes/AuthRoutes";
 import TestRoutes from "./routes/TestRoutes";
 import ProfileRoutes from "./routes/ProfileRoutes";
 import ResultRoutes from "./routes/ResultRoutes";
-import CourseRoutes from "./routes/CourseRoutes";
-import TipsRoutes from "./routes/TipsRoutes";
+
+
 import AdminRoutes from "./routes/AdminRoutes";
 import StaffRoutes from "./routes/StaffRoutes";
 
-
-
 const loading = (
-  <div className="pt-3 text-center">
-    <div className="sk-spinner sk-spinner-pulse"></div>
-  </div>
+  // <div className="pt-3 text-center">
+  //   <div className="sk-spinner sk-spinner-pulse"></div>
+    <div class="book">
+        <div class="book__pg-shadow"></div>
+        <div class="book__pg"></div>
+        <div class="book__pg book__pg--2"></div>
+        <div class="book__pg book__pg--3"></div>
+        <div class="book__pg book__pg--4"></div>
+        <div class="book__pg book__pg--5"></div>
+      </div>
+ // </div>
 );
 
 const App = () => {
-  
-
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
- 
-  useEffect(()=>{
-    if(TokenService.getuserInfo()){
-    dispatch({
-      type: types.USER_LOGIN_SUCCESS,
-      payload: TokenService.getuserInfo(),
-    })
-   
-  }
-  },[dispatch])
+  useEffect(() => {
+    if (TokenService.getuserInfo()) {
+      dispatch({
+        type: types.USER_LOGIN_SUCCESS,
+        payload: TokenService.getuserInfo(),
+      });
+    }
+  }, [dispatch]);
   useEffect(() => {
     const getUser = () => {
       fetch("https://ezlish-server.onrender.com/auth/login/success", {
@@ -59,12 +61,11 @@ const App = () => {
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
-
           dispatch({
             type: types.USER_LOGIN_SUCCESS,
             payload: resObject.user,
-          })
-          
+          });
+
           TokenService.setuserInfo(resObject.user);
           console.log(resObject.user);
         })
@@ -73,23 +74,20 @@ const App = () => {
         });
     };
     getUser();
-  },[dispatch]);
-
-
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
       <Navbar user={userInfo} />
       <React.Suspense fallback={loading}>
         <AuthRoutes />
-        <CourseRoutes />
+     
         <TestRoutes />
         <ProfileRoutes />
         <ResultRoutes />
-        <TipsRoutes />
+        
         <AdminRoutes />
         <StaffRoutes />
-        
         <Footer />
       </React.Suspense>
     </BrowserRouter>
@@ -97,4 +95,3 @@ const App = () => {
 };
 
 export default App;
-

@@ -1,63 +1,56 @@
-div .test-info{
-    margin-top:80px;
-    padding: 15px;
-    border:solid;
-    border-radius: 5px;
-    margin-bottom: 30px;
-  
+div .test-info {
+  margin-top: 80px;
+  padding: 15px;
+  border: solid;
+  border-radius: 5px;
+  margin-bottom: 30px;
 }
 
 div .test-info h1 {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
-
-
-
-#button-start{
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-bottom:10px;
+#button-start {
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
 }
-#comment-bar{
-    margin-left:30px;
-    margin-bottom:10px;
-    width:70%;
-      
+#comment-bar {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  width: 70%;
 }
-#alert{
-    margin:20px;
+#alert {
+  margin: 20px;
 }
-#button{
-    border-radius: 5px;
-    border:groove;
+#button {
+  border-radius: 5px;
+  border: groove;
 }
 
-#basic-addon2{
-    margin-bottom:10px;
-    margin-right:10px;
+#basic-addon2 {
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
-#button:focus{
+#button:focus {
   background-color: rgba(0, 85, 255, 0.262);
 }
 @media screen and (max-width: 960px) {
-div .comment {
+  div .comment {
     margin-left: 30px;
+  }
+}
+div .alert {
+  background-color: bisque;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-}
-div .alert{
-    background-color: bisque;
-    border-radius: 5px;
-    padding:10px;
-}
-
-#group{
-    background-color: white;
-    color:black;
-    border:solid;
-
+#group {
+  background-color: white;
+  color: black;
+  border: solid;
 }
 
 .App {
@@ -71,15 +64,10 @@ div .alert{
   align-items: center;
 }
 
-
-
-
-
-
-div.test{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap:wrap;
+div.test {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }

@@ -1,97 +1,91 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import FlashcardList from '../../components/Flashcard/FlashcardList';
-import './Flashcard.css'
-import axios from 'axios'
-import { Link} from "react-router-dom";
-import Flashcard from '../../components/Flashcard/Flashcard';
-
+import React, { useState, useEffect, useRef } from "react";
+import FlashcardList from "../../components/Flashcard/FlashcardList";
+import "./Flashcard.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Flashcard from "../../components/Flashcard/Flashcard";
 
 function FlashCards() {
-  const [flashcards, setFlashcards] = useState([])
-  const [categories, setCategories] = useState([])
-  const [category, setCategory] = useState([])
-  const [question, setQuestion] = useState([])
-  const [answer, setAnswer] = useState([])
-  const categoryEl = useRef()
-
-
-  useEffect(() => {
-    axios
-      .get('https://ezlish-server.onrender.com/api/flashcard/category')
-      .then(res => {
-        setCategories(res.data)
-      })
-  }, [])
+  const [flashcards, setFlashcards] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [question, setQuestion] = useState([]);
+  const [answer, setAnswer] = useState([]);
+  const categoryEl = useRef();
 
   useEffect(() => {
     axios
-      .post('https://ezlish-server.onrender.com/api/flashcard',
-      {
+      .get("https://ezlish-server.onrender.com/api/flashcard/category")
+      .then((res) => {
+        setCategories(res.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post("https://ezlish-server.onrender.com/api/flashcard", {
         category: "bird",
         question: "Bird",
-        answer:"chim"
+        answer: "chim",
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }, []);
 
-      })
-      .then(res => {
-        console.log(res)
-      })
-  }, [])
- 
-  
   function decodeString(str) {
-    const textArea = document.createElement('textarea')
-    textArea.innerHTML= str
-    return textArea.value
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = str;
+    return textArea.value;
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     axios
-    .get('https://ezlish-server.onrender.com/api/flashcard'.concat("/").concat(categoryEl.current.value), {
-      params: {
-        
-        category: categoryEl.current.value
-      }
-    })
-    .then(res => {
-      setFlashcards(res.data.map((questionItem, index) => {
-          
-          return {
-            id: `${index}-${Date.now()}`,
-            question: decodeString(questionItem.question),
-            answer: decodeString(questionItem.answer)
-          }
-        }))
-    })
+      .get(
+        "https://ezlish-server.onrender.com/api/flashcard"
+          .concat("/")
+          .concat(categoryEl.current.value),
+        {
+          params: {
+            category: categoryEl.current.value,
+          },
+        }
+      )
+      .then((res) => {
+        setFlashcards(
+          res.data.map((questionItem, index) => {
+            return {
+              id: `${index}-${Date.now()}`,
+              question: decodeString(questionItem.question),
+              answer: decodeString(questionItem.answer),
+            };
+          })
+        );
+      });
   }
-  //const cates = [... new Set(categories.map(category => category.category))]
-  //console.log(cates)
-  
+
   function onSubmit(e) {
     //e.preventDefault()
     const userObject = {
-        category,
-        question,
-        answer
+      category,
+      question,
+      answer,
     };
-    axios.post('https://ezlish-server.onrender.com/api/flashcard/add', userObject)
-        .then((res) => {
-          alert("Create flashcard successfully");
-            console.log(res)
-        }).catch((error) => {
-            console.log(error)
-        });
-        
-   
-}
+    axios
+      .post("https://ezlish-server.onrender.com/api/flashcard/add", userObject)
+      .then((res) => {
+        alert("Create flashcard successfully");
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-
-
- 
   return (
     <>
-    <div className="container-fluid bg-primary py-5 mb-5 page-header">
+      <div className="container-fluid bg-primary py-5 mb-5 page-header">
         <div className="container py-5">
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
@@ -117,38 +111,34 @@ function FlashCards() {
           </div>
         </div>
       </div>
-      <div className='row'>
-      <div className='column left'>
-      <form  onSubmit={handleSubmit}>
-        <div className="flashcard-form-group">
-          <label htmlFor="category" id='cat'>Category</label>
-          <select id="category" ref={categoryEl}>
-          {categories.map(category => {
-              return <option value={category} key={category}>{category}</option>
-            })}
-          </select>
-          <button className="flashcard-btn">Generate Flashcard</button>
+      <div className="rowflashcards mb-4">
+        <div className="col-lg-4 mb-4">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="category" className="font-size-26" id="cat">
+                Category
+              </label>
+              <select id="category" ref={categoryEl} className="form-control">
+                {categories.map((category) => (
+                  <option value={category} key={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <button className="btn btn-primary mt-3">
+                Generate Flashcard
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-      </div>
-      
-      <div className='column middle'>       
-        <div className="flashcard-container">
-        <FlashcardList flashcards={flashcards} />
+        <div className="col-lg-8">
+          <div className="flashcard-container">
+            <FlashcardList flashcards={flashcards} />
+          </div>
         </div>
-      </div>
-
-                
-         
       </div>
     </>
   );
-  
-          }
-          
-  export default FlashCards;
+}
 
-
-
-
-
+export default FlashCards;

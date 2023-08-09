@@ -140,7 +140,8 @@
   margin-top: 0;
 }
 
-div.row{
+div.rowflashcards{
+  display: flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;

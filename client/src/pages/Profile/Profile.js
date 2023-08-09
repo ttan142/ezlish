@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TokenService from "../../utils/tokenService";
-import {Result,Pagination} from "../../components/Result"
+import { Result, Pagination } from "../../components/Result";
 
 import "./Profile.css";
 
-import { Link,useNavigate } from "react-router-dom";
-import {getAscending,getDescending} from "../../utils/dateService"
+import { Link, useNavigate } from "react-router-dom";
+import { getAscending, getDescending } from "../../utils/dateService";
 
 function Profile() {
   const history = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [increase,setIncrease]=useState(false);
+  const [increase, setIncrease] = useState(false);
   const [resultItem, setItem] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
-
- 
-  
-  
 
   useEffect(() => {
     setLoading(true);
@@ -33,13 +29,11 @@ function Profile() {
       )
       .then(
         (response) => {
-
           //response.data.result
-        
+
           // giam dan
-        // 
-          
-          
+          //
+
           response.data.result = getDescending(response.data.result);
           setItem(response.data.result);
 
@@ -52,10 +46,9 @@ function Profile() {
       );
   }, []);
 
- 
- const handleColor= (e)=>{
+  const handleColor = (e) => {
     console.log(e.target.value);
- }
+  };
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -93,45 +86,43 @@ function Profile() {
       </div>
       {resultItem.length === 0 ? (
         <div className="cardss">
-          <h1 style={{ color: "red" }}>
-          You have not done any test
-        </h1>
+          <h1 style={{ color: "red" }}>You have not done any test</h1>
         </div>
-        ) : (
-          <>
-        <div className="cardss">
-          <div id="sort-bar">
-            <select
-              name="sort"
-              onClick={(e) => {
-                if (e.target.value === "inc") {
-                  const s = getAscending(resultItem);
-                  setItem(s);
-                } else {
-                  const s = getDescending(resultItem);
-                  setItem(s);
-                }
-              }}
-            >
-              <option value="dec">Newest</option>
-              <option value="inc">Oldest</option>
-            </select>
-          </div>
-          <Result
-            resultItem={currentPosts}
-            loading={loading}
-            status={increase}
-          />
+      ) : (
+        <>
+          <div className="cardss">
+            <div id="sort-bar">
+              <select
+                name="sort"
+                onClick={(e) => {
+                  if (e.target.value === "inc") {
+                    const s = getAscending(resultItem);
+                    setItem(s);
+                  } else {
+                    const s = getDescending(resultItem);
+                    setItem(s);
+                  }
+                }}
+              >
+                <option value="dec">Newest</option>
+                <option value="inc">Oldest</option>
+              </select>
+            </div>
+            <Result
+              resultItem={currentPosts}
+              loading={loading}
+              status={increase}
+            />
 
-          <Pagination
-            resultsPerPage={postsPerPage}
-            totalResults={resultItem.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </div>
+            <Pagination
+              resultsPerPage={postsPerPage}
+              totalResults={resultItem.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </div>
         </>
-        )}
+      )}
     </>
   );
 }

@@ -13,24 +13,24 @@ const Home = () => {
       }
   }, [userInfo, navigate]);
   return (
-    <section className="vh-90 mt-5 mb-3">
+    <section className="vh-90 mt-5 mb-5 pt-4">
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-80">
           <div className="col-lg-12 col-xl-11">
             <div className="card text-white" style={{ borderRadius: '25px', backgroundColor: '#02b4b8' }}>
               <div className="card-body p-md-4">
-                <div className="row justify-content-center">
+                <div className="py-3 row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 ">
-                    <h1 className="text-center pt-5">Welcome to the Staff Page</h1>
-                    <div className="d-flex justify-content-center mx-3 mt-6 pt-5">
+                    <h1 className="text-center pt-5">Welcome to the <br></br>Staff Page</h1>
+                    <div className="d-flex justify-content-center mx-4 mt-6 pt-5">
                       <Link to="/staff/manageQuestions">
-                        <button className="btn btn-primary btn-lg me-3">Create Questions</button>
+                        <button className="btn btn-primary btn-lg me-3">Manage Questions</button>
                       </Link>
                       <Link to="/staff/manageTests">
-                        <button className="btn btn-primary btn-lg me-3">Create Tests</button>
+                        <button className="btn btn-primary btn-lg me-3">Manage Tests</button>
                       </Link>
                       <Link to="/staff/manageFlashcards">
-                        <button className="btn btn-primary btn-lg me-3">Create Flahscard</button>
+                        <button className="btn btn-primary btn-lg me-3">Manage Flahscard</button>
                       </Link>
                     </div>
                   </div>

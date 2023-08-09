@@ -94,7 +94,7 @@ img {
   }
 }
 
-h2 {
+h4 {
   font-size: 16px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -184,10 +184,18 @@ div.time-bar {
 }
 
 #light {
-  border-radius: 10px;
+  border-radius: 50%; /* Makes the border circular */
+  width: 30px; /* Set a fixed width to maintain circular shape */
+  height: 30px; /* Set a fixed height to maintain circular shape */
   padding: 7px;
   margin-left: 15px;
   background-color: #1eb2a6;
-  border: grid;
+  border: none; /* Remove border property as it's not needed */
   color: white;
+  display: inline-flex; /* Ensures proper alignment within container */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+  text-align: center; /* Center text content */
+  text-decoration: none; /* Remove underline from link */
 }
+

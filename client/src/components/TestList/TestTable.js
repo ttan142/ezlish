@@ -1,9 +1,8 @@
-import React from 'react'
-import CardBlog from '../CardBlog/CardBlog'
+import React from "react";
+import CardBlog from "../CardBlog/CardBlog";
 function TestTable(props) {
   return (
     <>
-    
       <div class="container-xxl py-5">
         <div class="container">
           <div class="row g-4">
@@ -27,4 +26,4 @@ function TestTable(props) {
   );
 }
 
-export default TestTable
+export default TestTable;

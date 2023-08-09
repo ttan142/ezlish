@@ -1,29 +1,27 @@
-import axios from 'axios';
-import * as types from '../constant/Question/questionConstant';
+import axios from "axios";
+import * as types from "../constant/Question/questionConstant";
 
 export const getQuestions = (testId) => async (dispatch) => {
+  try {
+    dispatch({ type: types.QUESTION_REQUEST });
 
-    try {
+    const { data } = await axios.get(
+      "https://ezlish-server.onrender.com/api/questions/".concat(
+        testId.toString()
+      )
+    );
 
-        dispatch({ type: types.QUESTION_REQUEST });
-
-
-        const  {data} = await axios.get('https://ezlish-server.onrender.com/api/questions/'.concat(testId.toString()));
-
-
-        dispatch({
-            type: types.QUESTION_SUCCESS,
-            payload: data,
-        });
-        
-    } catch (error) {
-        dispatch({
-            type: types.QUESTION_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        });
-    }
-
-}
+    dispatch({
+      type: types.QUESTION_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.QUESTION_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

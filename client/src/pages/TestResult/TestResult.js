@@ -1,80 +1,63 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./TestResult.css";
-import axios from 'axios'
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Answer from "../../components/TestResult/Answer";
 import CommentCard from "../../components/comment/CommentCard";
 function TestResult(props) {
-
   const location = useLocation();
-  const { resultId } = location.state;      //RESULTid
-  const [data,setData] = useState([])
+  const { resultId } = location.state; //RESULTid
+  const [data, setData] = useState([]);
   const history = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  useEffect(()=>{
-
-      axios.get("https://ezlish-server.onrender.com/api/results/test/".concat(resultId)).then(
+  useEffect(() => {
+    axios
+      .get(
+        "https://ezlish-server.onrender.com/api/results/test/".concat(resultId)
+      )
+      .then(
         (response) => {
-          console.log(response);  
+          console.log(response);
           setData(response.data.result[0]);
-          
         },
         (error) => {
           console.log(error);
         }
-      ); 
-  },[])
-   
-   useEffect(()=>{
-    console.log(data);
-   },[data])
-   
-   const handleDetailResult = ()=>{
-     history(`/result/details/${resultId}`)
-   }
+      );
+  }, []);
 
-   const handleAgain = ()=>{
-    axios.get("https://ezlish-server.onrender.com/api/test/".concat(resultId)).then(
-      (response) => {
-        console.log(response.data[0].result);
-      history(`/test/${response.data[0].result._id}`, {
-        state: response.data[0].result,
-      }); 
-      },
-      (error) => {
-        console.log(error);
-      }
-    ); 
-   }
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const handleDetailResult = () => {
+    history(`/result/details/${resultId}`);
+  };
+
   return (
     <>
       <section id="test-result">
-        <div className="content">
+        <div className="content bg-white p-4 rounded border">
           <div className="head-content">
             <h1>
               {" "}
-              Result: {data.testResult &&
-                data.testResult[0].name} Test{" "}
+              Result: {data.testResult && data.testResult[0].name} Test{" "}
               {data.testResult && data.testResult[0].test}
             </h1>
-            <button className="result"> View your answers </button>
-            <button onClick={handleAgain} className="result">
-              {" "}
-              Retry{" "}
-            </button>
           </div>
-          <div className="result-content">
-            <div className="result-item">
+          <div className="result-content d-flex flex-row align-items-start justify-content-around">
+            <div className="result-item mr-2 d-flex flex-wrap flex-column justify-content-center align-items-center">
               <p>
-                <i class="fa fa-list-alt" aria-hidden="true"></i>Result
-                : {data.result}
+                <i class="fa fa-list-alt" aria-hidden="true"></i>Result :{" "}
+                {data.result}
               </p>
               <p>
                 {" "}
-                <i id="correct" class="fa fa-check" aria-hidden="true"></i>Accuracy : {data.accuracy} %
+                <i id="correct" class="fa fa-check" aria-hidden="true"></i>
+                Accuracy : {data.accuracy} %
               </p>
               <p>
                 <i class="fas fa-clock"></i>Time : {data.time}
@@ -129,4 +112,4 @@ export default TestResult;
           />
          //can cai testid
           <CommentCard id={ data.testResult[0]._id} />
-        </div>*/ 
+        </div>*/

@@ -20,15 +20,13 @@ div .blog-item h1 {
 
 button {
   margin-left: 10px;
-  padding: 4px;
+  padding: 8px;
   color: white;
   background-color: #1eb2a6;
   border-radius: 5px;
   margin-top: 20px;
 }
-p {
-  margin-top: 20px;
-}
+
 
 #blog{
   margin-right: 20px;

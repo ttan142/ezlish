@@ -1,6 +1,6 @@
 import React from "react";
-import avatar from '../../img/avatar.png'
-import "./TestList.css";
+import avatar from "../../img/avatar.png";
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TestTable, SearchBar } from "../../components/TestList";
@@ -18,15 +18,15 @@ function TestList() {
   //handle user input
   const handleFilterText = (e) => {};
   // take all Test
-   useEffect(()=>{
-    if(!TokenService.getuserInfo()){
+  useEffect(() => {
+    if (!TokenService.getuserInfo()) {
       alert("Login first");
     }
-   },[TokenService.getuserInfo()]);
+  }, [TokenService.getuserInfo()]);
   //filter test by button
-   if(!TokenService.getuserInfo()){
+  if (!TokenService.getuserInfo()) {
     history("/login");
-   }
+  }
   return (
     <>
       <div className="container-fluid bg-primary py-5 mb-5 page-header">
@@ -55,39 +55,53 @@ function TestList() {
           </div>
         </div>
       </div>
-      
-        <div className="container">
-          <SearchBar
-            setTest={setTest}
-            tests={test}
-            filterText={filterText}
-            onTextChange={handleFilterText}
-          ></SearchBar>
 
-          <div className="user" id="card">
-            <img
-              src={
-                (TokenService.getuserInfo() && TokenService.getuserInfo().photos) || avatar} onError={handleImageError}
-              
-                className="avatar"
+      <div className="container">
+        <div className="row">
+          <div className="col-6 col-sm-9">
+            <SearchBar
+              setTest={setTest}
+              tests={test}
+              filterText={filterText}
+              onTextChange={handleFilterText}
             />
-            <p className="user-name">
-              {TokenService.getuserInfo() && TokenService.getuserInfo().name}
-            </p>
-            <hr></hr>
-            <Link to="/profile" id="profile">
-              View Result
-            </Link>
           </div>
-        </div>
-        <div className="search-result">
-          <div className="blog-card">
-            <div className="blog-wrap">
-              <TestTable tests={test}></TestTable>
+          <div className="col-6 col-sm-3">
+            <div className="user m-2 pt-2 border rounded text-center" id="card">
+              <img
+                src={
+                  (TokenService.getuserInfo() &&
+                    TokenService.getuserInfo().photos) ||
+                  avatar
+                }
+                onError={handleImageError}
+                className="w-25 img-thumbnail rounded-circle user-avatar" // Updated class name
+                alt="User Avatar"
+              />
+              <p className="m-0 p-0 user-name text-center justify-center">
+                {TokenService.getuserInfo() && TokenService.getuserInfo().name}
+              </p>
+              <hr className="mb-3" />
+              <Link
+                to="/profile"
+                className="mb-3 btn btn-secondary btn-sm"
+                id="profile"
+                style={{ backgroundColor: "#1eb2a6", color: "white" }}
+              >
+                View Result
+              </Link>
             </div>
           </div>
         </div>
-    
+      </div>
+
+      <div className="search-result">
+        <div className="blog-card">
+          <div className="blog-wrap">
+            <TestTable tests={test} />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -25,13 +25,3 @@ function CommentC({ children, comment, socket }) {
 }
 
 export default CommentC;
-
-/*  {comment.childComments &&
-          comment.childComments.map((child) => (
-            <>
-              <CommentC comment={child} >
-               
-              </CommentC>
-            </>
-          ))}
-          */

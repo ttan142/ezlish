@@ -40,7 +40,7 @@ function Test() {
       setShowToast(true);
       return; // Stop execution if the balance is insufficient
     }
-    const response = await axios
+    await axios
       .put(`https://ezlish-server.onrender.com/api/users/${testCost}/${userId}`)
       .then((response) => {
         // Handle the response if the update is successful
@@ -57,7 +57,7 @@ function Test() {
     state.questions = data.answer;
     state.parts = data.array;
   
-    history("/toeic", { state: state });
+    history("/testing", { state: state });
   };
   
 
@@ -86,10 +86,7 @@ function Test() {
             <h1>
               {state.name} Test {state.test}
             </h1>
-            <div class="btn-group">
-              <button id="group">Test Info</button>
-              <button id="group">Transcript</button>
-            </div>
+           
             <p>
               Time: {state.time} minutes | {state.part} parts |{" "}
               {state.numberQuestion} questions
