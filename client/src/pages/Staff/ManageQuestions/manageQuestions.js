@@ -658,6 +658,12 @@ const CreateQuestionForm1 = () => {
                             >
                               Delete
                             </button>
+                            <button
+                          className="btn btn-outline-primary"
+                          onClick={() => setSelectedQuestion(null)}
+                        >
+                          Close
+                        </button>
                           </div>
                         </form>
                       </div>

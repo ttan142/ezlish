@@ -456,6 +456,12 @@ const ManageFlashcards = () => {
                               >
                                 Delete Flashcard
                               </button>
+                              <button
+                          className="btn btn-outline-primary"
+                          onClick={() => setSelectedFlashcard(null)}
+                        >
+                          Close Edit
+                        </button>
                             </div>
                           </form>
                         </div>

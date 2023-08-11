@@ -531,6 +531,12 @@ const CreateTestForm = () => {
                             >
                               Delete Test
                             </button>
+                            <button
+                          className="btn btn-outline-primary"
+                          onClick={() => setSelectedTest(null)}
+                        >
+                          Close Edit
+                        </button>
                             </div>
                           </form>
                         </div>
